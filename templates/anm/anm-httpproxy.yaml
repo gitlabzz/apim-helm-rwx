@@ -1,0 +1,26 @@
+{{- if and (.Values.anm.httpproxy.enabled) (.Values.anm.enabled) -}}
+{{- if ne .Values.global.platform "OPENSHIFT" }}
+
+{{- $anmName := include "anm.name" . -}}
+{{- $domainName := include "domain.name" . -}}
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ template "anm.name" . }}
+  labels: {{ include "anm.labels" . | nindent 4 }}
+spec:
+  virtualhost:
+    fqdn: {{ (.Values.anm.httpproxy.fqdn) }}
+    tls:
+      secretName:  {{ (.Values.anm.httpproxy.secretName) }}
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: {{ (.Values.anm.httpproxy.name) }}
+          port: {{ (.Values.anm.httpproxy.port) }}
+          protocol: {{ (.Values.anm.httpproxy.protocol) }}
+
+{{- end }}
+{{- end }}

@@ -1,0 +1,26 @@
+{{- if and (.Values.apimgr.httpproxy.enabled) (.Values.apimgr.enabled) -}}
+{{- if ne .Values.global.platform "OPENSHIFT" }}
+
+{{- $apimgrName := include "apimgr.name" . -}}
+{{- $domainName := include "domain.name" . -}}
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ template "apimgr.name" . }}
+  labels: {{ include "apimgr.labels" . | nindent 4 }}
+spec:
+  virtualhost:
+    fqdn: {{ (.Values.apimgr.httpproxy.fqdn) }}
+    tls:
+      secretName:  {{ (.Values.apimgr.httpproxy.secretName) }}
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: {{ (.Values.apimgr.httpproxy.name) }}
+          port: {{ (.Values.apimgr.httpproxy.port) }}
+          protocol: {{ (.Values.apimgr.httpproxy.protocol) }}
+
+{{- end }}
+{{- end }}

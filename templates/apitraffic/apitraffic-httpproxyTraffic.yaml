@@ -1,0 +1,25 @@
+{{- if and (.Values.apitraffic.httpproxyTraffic.enabled) (.Values.apitraffic.enabled) -}}
+{{- if ne .Values.global.platform "OPENSHIFT" }}
+
+{{- $domainName := include "domain.name" . -}}
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ template "apitraffic.name" . }}
+  labels: {{ include "apitraffic.labels" . | nindent 4 }}
+spec:
+  virtualhost:
+    fqdn: {{ (.Values.apitraffic.httpproxyTraffic.fqdn) }}
+    tls:
+      secretName:  {{ (.Values.apitraffic.httpproxyTraffic.secretName) }}
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: {{ (.Values.apitraffic.httpproxyTraffic.name) }}
+          port: {{ (.Values.apitraffic.httpproxyTraffic.port) }}
+          protocol: {{ (.Values.apitraffic.httpproxyTraffic.protocol) }}
+
+{{- end }}
+{{- end }}

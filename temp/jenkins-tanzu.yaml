@@ -1,0 +1,36 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"projectcontour.io/v1","kind":"HTTPProxy","metadata":{"annotations":{},"name":"jenkins-web","namespace":"jenkins"},"spec":{"routes":[{"conditions":[{"prefix":"/"}],"services":[{"name":"jenkins","port":8080}]}],"virtualhost":{"fqdn":"jenkins-np.bcthk.info","tls":{"secretName":"cert-delegation/tls-secret"}}}}
+  creationTimestamp: "2022-02-28T08:05:28Z"
+  generation: 1
+  name: jenkins-web
+  namespace: jenkins
+  resourceVersion: "3187308"
+  uid: 241a2437-f766-4351-acf0-58a4c39e7ded
+spec:
+  routes:
+  - conditions:
+    - prefix: /
+    services:
+    - name: jenkins
+      port: 8080
+  virtualhost:
+    fqdn: jenkins-np.bcthk.info
+    tls:
+      secretName: cert-delegation/tls-secret
+status:
+  conditions:
+  - lastTransitionTime: "2022-03-02T04:40:06Z"
+    message: Valid HTTPProxy
+    observedGeneration: 1
+    reason: Valid
+    status: "True"
+    type: Valid
+  currentStatus: valid
+  description: Valid HTTPProxy
+  loadBalancer:
+    ingress:
+    - ip: 10.168.31.18

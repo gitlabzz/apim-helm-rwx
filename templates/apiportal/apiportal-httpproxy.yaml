@@ -1,0 +1,26 @@
+{{- if and (.Values.apiportal.httpproxy.enabled) (.Values.anm.enabled) -}}
+{{- if ne .Values.global.platform "OPENSHIFT" }}
+
+{{- $apiportalName := include "anm.name" . -}}
+{{- $domainName := include "domain.name" . -}}
+
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ template "apiportal.name" . }}
+  labels: {{ include "apiportal.labels" . | nindent 4 }}
+spec:
+  virtualhost:
+    fqdn: {{ (.Values.apiportal.httpproxy.fqdn) }}
+    tls:
+      secretName:  {{ (.Values.apiportal.httpproxy.secretName) }}
+  routes:
+    - conditions:
+        - prefix: /
+      services:
+        - name: {{ (.Values.apiportal.httpproxy.name) }}
+          port: {{ (.Values.apiportal.httpproxy.port) }}
+          protocol: {{ (.Values.apiportal.httpproxy.protocol) }}
+
+{{- end }}
+{{- end }}

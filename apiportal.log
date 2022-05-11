@@ -1,0 +1,87 @@
+[2022-03-08 02:41:17 | apiportal:boot] Validating environment variables values ...
+[2022-03-08 02:41:17 | apiportal:boot] Done validating environment variables values.
+[2022-03-08 02:41:17 | apiportal:boot] Extracting DOCROOT ...
+tar: htdoc/language: Cannot change mode to rwxrwxr-x: Operation not permitted
+tar: htdoc/templates: Cannot change mode to rwxrwxr-x: Operation not permitted
+tar: htdoc/administrator/language: Cannot change mode to rwxrwxr-x: Operation not permitted
+tar: htdoc/administrator/components/com_apiportal/assets/cert: Cannot change mode to rwxrwxr-x: Operation not permitted
+tar: htdoc/images: Cannot change mode to rwxrwxr-x: Operation not permitted
+tar: Exiting with failure status due to previous errors
+[2022-03-08 02:41:21 | apiportal:boot] ERROR: some error occurred while extracting DOCROOT
+[2022-03-08 02:41:21 | apiportal:boot] Done extracting DOCROOT.
+[2022-03-08 02:41:21 | apiportal:boot] Configuring database access ...
+[2022-03-08 02:41:21 | apiportal:boot] Done configuring database access.
+[2022-03-08 02:41:21 | apiportal:boot] Checking database connection ...
+[2022-03-08 02:41:21 | apiportal:boot]   Connection successful...
+[2022-03-08 02:41:21 | apiportal:boot] Done checking database connection.
+[2022-03-08 02:41:21 | apiportal:boot] Detecting boot context ...
+[2022-03-08 02:41:21 | apiportal:boot]   Code version: 7.7.20220228
+[2022-03-08 02:41:21 | apiportal:boot]   Database version: 7.7.20220228
+[2022-03-08 02:41:21 | apiportal:boot:restart] Done detecting boot context.
+[2022-03-08 02:41:21 | apiportal:boot:restart] Setting Apache ports ...
+[2022-03-08 02:41:21 | apiportal:boot:restart] Done setting Apache ports.
+[2022-03-08 02:41:21 | apiportal:boot:restart] Configuring API Portal access via SSL ...
+[2022-03-08 02:41:21 | apiportal:boot:restart] Done configuring API Portal access via SSL.
+[2022-03-08 02:41:21 | apiportal:boot:restart] Configuring API Manager in JAI ...
+[2022-03-08 02:41:22 | apiportal:boot:restart] Done configuring API Manager in JAI.
+[2022-03-08 02:41:22 | apiportal:boot:restart] Applying system overrides ...
+[2022-03-08 02:41:22 | apiportal:boot:restart] Done applying system overrides.
+[2022-03-08 02:41:22 | apiportal:boot:restart] Initialization is done! Wait apache to start ...
+2022-03-08 02:41:22,740 INFO supervisord started with pid 1
+2022-03-08 02:41:23,745 INFO spawned: 'apache' with pid 190
+2022-03-08 02:41:23,749 INFO spawned: 'jobber' with pid 191
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.240.8.16. Set the 'ServerName' directive globally to suppress this message
+[Tue Mar 08 02:41:23.816134 2022] [ssl:warn] [pid 193] AH01909: 10.240.8.16:443:0 server certificate does NOT include an ID which matches the server name
+[Tue Mar 08 02:41:23.816322 2022] [ssl:warn] [pid 193] AH01916: Init: (www.example.com:443) You configured HTTP(80) on the standard HTTPS(443) port!
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.240.8.16. Set the 'ServerName' directive globally to suppress this message
+[Tue Mar 08 02:41:23.837581 2022] [ssl:warn] [pid 193] AH01909: 10.240.8.16:443:0 server certificate does NOT include an ID which matches the server name
+[Tue Mar 08 02:41:23.837642 2022] [ssl:warn] [pid 193] AH01916: Init: (www.example.com:443) You configured HTTP(80) on the standard HTTPS(443) port!
+[Tue Mar 08 02:41:23.839265 2022] [mpm_prefork:notice] [pid 193] AH00163: Apache/2.4.52 (Unix) OpenSSL/1.1.1l configured -- resuming normal operations
+[Tue Mar 08 02:41:23.839282 2022] [core:notice] [pid 193] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+2022-03-08 02:41:24,841 INFO success: apache entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-03-08 02:41:24,841 INFO success: jobber entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+10.240.8.1 - - [08/Mar/2022:02:41:28 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.8.1 - - [08/Mar/2022:02:41:33 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.8.1 - - [08/Mar/2022:02:41:38 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.8.1 - - [08/Mar/2022:02:41:43 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.8.1 - - [08/Mar/2022:02:41:48 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.8.1 - - [08/Mar/2022:02:41:53 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.8.1 - - [08/Mar/2022:02:41:58 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.8.1 - - [08/Mar/2022:02:42:03 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+10.240.7.11 - - [08/Mar/2022:02:42:03 +0000] "GET / HTTP/1.1" 200 13718 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/local/css/themes/axway/fonts-google.css HTTP/1.1" 200 2902 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/system/css/system.css HTTP/1.1" 200 881 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/local/css/themes/axway/megamenu.css HTTP/1.1" 200 14192 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/js/highcharts/js/highcharts.js HTTP/1.1" 200 127576 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /plugins/system/t3/base-bs3/bootstrap/js/bootstrap.js HTTP/1.1" 200 75484 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/css/apiportal.css HTTP/1.1" 200 4438 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/local/css/themes/axway/layouts/blog.css HTTP/1.1" 200 924 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/local/css/themes/axway/template.css HTTP/1.1" 200 162253 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /images/com_apiportal/menu/axway-logo-top.svg HTTP/1.1" 200 1798 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/icons/css/axway-icons.css HTTP/1.1" 200 14918 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /media/jui/js/jquery-migrate.min.js?5b6ad19182ea21a4e4385dbb3a788e77 HTTP/1.1" 200 10056 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /media/jui/js/jquery.min.js?5b6ad19182ea21a4e4385dbb3a788e77 HTTP/1.1" 200 97646 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/local/css/themes/axway/bootstrap.css HTTP/1.1" 200 159051 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /media/jui/js/jquery-noconflict.js?5b6ad19182ea21a4e4385dbb3a788e77 HTTP/1.1" 200 21 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/js/jquery.metadata.js HTTP/1.1" 200 3839 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/js/apiportal.js HTTP/1.1" 200 14386 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/js/jquery.validate.min.js HTTP/1.1" 200 24431 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /plugins/system/t3/base-bs3/js/jquery.tap.min.js HTTP/1.1" 200 1881 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /plugins/system/t3/base-bs3/js/script.js HTTP/1.1" 200 6413 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /plugins/system/t3/base-bs3/js/menu.js HTTP/1.1" 200 16876 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /plugins/system/t3/base-bs3/js/nav-collapse.js HTTP/1.1" 200 4634 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/js/script.js HTTP/1.1" 200 2892 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/js/system-messages.js HTTP/1.1" 200 1292 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/img/home/create.png HTTP/1.1" 200 2467 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/img/home/expolore.png HTTP/1.1" 200 2511 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /media/system/css/system.css HTTP/1.1" 200 1433 "https://apiportal-uatk8apim.bcthk.info/templates/system/css/system.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/img/home/manage.png HTTP/1.1" 200 3794 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/img/home/community.png HTTP/1.1" 200 1932 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /components/com_apiportal/assets/img/abstract.jpg HTTP/1.1" 200 94014 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/fonts/font-roboto-google/Roboto-Bold.ttf HTTP/1.1" 200 135820 "https://apiportal-uatk8apim.bcthk.info/templates/purity_iii/local/css/themes/axway/fonts-google.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/fonts/font-roboto-google/Roboto-Light.ttf HTTP/1.1" 200 140276 "https://apiportal-uatk8apim.bcthk.info/templates/purity_iii/local/css/themes/axway/fonts-google.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/fonts/font-roboto-google/Roboto-Regular.ttf HTTP/1.1" 200 145348 "https://apiportal-uatk8apim.bcthk.info/templates/purity_iii/local/css/themes/axway/fonts-google.css" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.7.11 - - [08/Mar/2022:02:42:04 +0000] "GET /templates/purity_iii/favicon.ico HTTP/1.1" 200 6000 "https://apiportal-uatk8apim.bcthk.info/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:97.0) Gecko/20100101 Firefox/97.0"
+10.240.8.1 - - [08/Mar/2022:02:42:08 +0000] "GET / HTTP/1.1" 200 13688 "-" "kube-probe/1.21"
+::1 - - [08/Mar/2022:02:42:09 +0000] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.4.52 (Unix) OpenSSL/1.1.1l (internal dummy connection)"
+::1 - - [08/Mar/2022:02:42:10 +0000] "OPTIONS * HTTP/1.0" 200 - "-" "Apache/2.4.52 (Unix) OpenSSL/1.1.1l (internal dummy connection)"
