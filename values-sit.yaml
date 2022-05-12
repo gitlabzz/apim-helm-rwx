@@ -55,8 +55,9 @@ anm:
    name: "anm"
    enabled: true
    replicas: 1
-   image: "apim/apim_anm_2022041901"
-   imageTag: "1"
+   image: "apim/apim_anm_snapshot"
+   #image: "apim/apim_anm_202202"
+   imageTag: "latest"
    containerPorts:
       anm: 8090
    imagePullSecrets:
@@ -145,6 +146,7 @@ anm:
               value: readiness.anm
             - name: Authorization
               value: "Basic YXBpLXNpdC1heHdheTpBeHdheUAxMjM0"
+              #value: "Basic YWRtaW46YmN0MjAyMQ=="
          path: /api/topology/version
          port: anm
          scheme: HTTPS
@@ -160,6 +162,7 @@ anm:
               value: liveness.anm
             - name: Authorization
               value: "Basic YXBpLXNpdC1heHdheTpBeHdheUAxMjM0"
+#value: "Basic YWRtaW46YmN0MjAyMQ=="
          path: /api/topology/version
          port: anm
          scheme: HTTPS
@@ -204,8 +207,10 @@ apimgr:
    # For API-Manager it is recommended to have only 1 replica
    replicas: 1
    nameOverride: ""
-   image: "apim/apim_apig_2022041401"
-   imageTag: "1"
+   image: "apim/apimgr_snapshot"
+   #image: "apim/apim_apig_202202_20220051001"
+   imageTag: "latest"
+   #imageTag: "1"
    containerPorts:
       manager: 8075
    imagePullSecrets:
@@ -353,8 +358,10 @@ apitraffic:
    name: "apitraffic"
    enabled: true
    replicas: 1
-   image: "apim/apim_apig_2022041401"
-   imageTag: "1"
+   image: "apim/apimgr_snapshot"
+   #image: "apim/apim_apig_202202_20220051001"
+   imageTag: "latest"
+   #imageTag: "1"
    nameOverride: ""
    imagePullSecrets:
    - name: registrypullsecret
@@ -727,8 +734,8 @@ analytics:
    # For API Analytics it is recommended to have only 1 replica
    replicas: 1
    nameOverride: ""
-   image: "apim/apim_aga_healthcheck_202202"
-   imageTag: "1"
+   image: "apim/apim_aga_snapshot"
+   imageTag: "latest"
    imagePullPolicy: "IfNotPresent" #either Always or IfNotPresent
    containerPorts:
       aga: 8040
