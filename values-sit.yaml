@@ -8,7 +8,7 @@ global:
   imagePullSecrets:
     - name: registrypullsecret
 
-  imagePullPolicy: "IfNotPresent"
+  imagePullPolicy: "Always"
 
   # Setup the docker repository used to pull images for anm, apimgr & traffic
   # Example: docker-registry.demo.axway.com/other-demo
@@ -729,7 +729,7 @@ analytics:
   nameOverride: ""
   image: "apim_sit/apim_aga"
   imageTag: "latest"
-  imagePullPolicy: "IfNotPresent" #either Always or IfNotPresent
+  imagePullPolicy: "Always" #either Always or IfNotPresent
   containerPorts:
     aga: 8040
 
