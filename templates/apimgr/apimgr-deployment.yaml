@@ -67,6 +67,11 @@ spec:
 {{- else }}
           emptyDir: {}
 {{- end }}
+        - name: trace
+          emptyDir: { }
+        - name: audit
+          persistentVolumeClaim:
+            claimName: apigw-audit-pvc
       {{- if .Values.apimgr.extraVolumes }}
 {{ toYaml ( .Values.apimgr.extraVolumes ) | indent 8 }}
       {{- end }}
@@ -87,6 +92,12 @@ spec:
 {{ toYaml .Values.global.imagePullSecrets | indent 8 }}
       {{- end }}
       initContainers:
+      - name: init-sidecar
+        image: busybox
+        command: [ '/bin/sh', '-c', 'mkdir -p /opt/Axway/apigateway/groups/emt-group/emt-service/logs/archive' ]
+        volumeMounts:
+          - name: audit
+            mountPath: "/opt/Axway/apigateway/groups/emt-group/emt-service/logs"
       {{- if .Values.cassandra.internal }}
       - name: init-cassandra
         image: busybox:1.33
@@ -104,6 +115,25 @@ spec:
 {{ tpl .Values.apimgr.extraInitContainers . | indent 6 }}
       {{- end }}
       containers:
+      - name: side-car
+        image: busybox
+        command: [ '/bin/sh', '-c']
+        args:
+          - while true;
+            do
+            cd /opt/Axway/apigateway/groups/emt-group/emt-service/logs;
+            ls -1t audit.log.* | tail -n +32 | xargs -I {} mv {} ./archive/{}.$(date +%Y%m%d%H%M%S);
+            find /opt/Axway/apigateway/groups/emt-group/emt-service/logs/archive -maxdepth 1 -mtime +90 -type f -exec rm {} \;
+            find /opt/Axway/apigateway/groups/emt-group/emt-service/logs/transaction -maxdepth 1 -mtime +90 -type f -exec rm {} \;
+            find /opt/Axway/apigateway/groups/emt-group/emt-service/trace -maxdepth 1 -mtime +90 -type f -exec rm {} \;
+            sleep 60;
+            done;
+            echo "moved logs to archive successfully!";
+        volumeMounts:
+          - name: audit
+            mountPath: "/opt/Axway/apigateway/groups/emt-group/emt-service/logs"
+          - name: trace
+            mountPath: "/opt/Axway/apigateway/groups/emt-group/emt-service/trace"
       - name: "{{ template "apimgr.name" . }}"
         securityContext:
 {{ toYaml .Values.apimgr.securityContext | indent 10 }}
@@ -212,6 +242,10 @@ spec:
 {{- end }}
         - name: events
           mountPath: {{ default "/opt/Axway/apigateway/events" .Values.apimgr.volumeMountsPaths.events | quote }}
+        - name: audit
+          mountPath: "/opt/Axway/apigateway/groups/emt-group/emt-service/logs"
+        - name: trace
+          mountPath: "/opt/Axway/apigateway/groups/emt-group/emt-service/trace"
         {{- if .Values.apimgr.extraVolumeMounts }}
 {{ toYaml (.Values.apimgr.extraVolumeMounts ) | indent 8 }}
         {{- end }}

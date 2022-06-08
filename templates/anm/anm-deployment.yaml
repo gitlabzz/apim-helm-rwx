@@ -46,6 +46,8 @@ spec:
       {{- end }}
       terminationGracePeriodSeconds: {{ .Values.anm.terminationGracePeriod }}
       volumes:
+        - name: trace
+          emptyDir: { }
         - name: events
 {{- if .Values.pvcs.events.enabled }}
           persistentVolumeClaim:
@@ -94,6 +96,12 @@ spec:
 {{ toYaml .Values.global.imagePullSecrets | indent 6 }}
       {{- end }}
       initContainers:
+      - name: init-sidecar
+        image: busybox
+        command: [ '/bin/sh', '-c', 'mkdir -p /opt/Axway/apigateway/logs/archive' ]
+        volumeMounts:
+          - name: audit
+            mountPath: "/opt/Axway/apigateway/logs"
       {{- if .Values.mysqlmetrics.internal }}
       - name: init-mysql
         image: busybox:1.33
@@ -103,6 +111,24 @@ spec:
 {{ tpl .Values.anm.extraInitContainers . | indent 6 }}
       {{- end }}
       containers:
+      - name: side-car
+        image: busybox
+        command: [ '/bin/sh', '-c']
+        args:
+          - while true;
+            do
+            cd /opt/Axway/apigateway/logs;
+            ls -1t audit.log.* | tail -n +32 | xargs -I {} mv {} ./archive/{}.$(date +%Y%m%d%H%M%S);
+            find /opt/Axway/apigateway/logs/archive -maxdepth 1 -mtime +90 -type f -exec rm {} \;
+            find /opt/Axway/apigateway/trace -maxdepth 1 -mtime +90 -type f -exec rm {} \;
+            sleep 30;
+            done;
+            echo "moved logs to archive successfully!";
+        volumeMounts:
+          - name: audit
+            mountPath: "/opt/Axway/apigateway/logs"
+          - name: trace
+            mountPath: "/opt/Axway/apigateway/trace"
       - name: "{{ template "anm.name" . }}"
       {{- if .Values.anm.args }}
         args:
@@ -177,6 +203,8 @@ spec:
 {{ toYaml .Values.anm.envFrom | indent 8 }}
         {{- end }}
         volumeMounts:
+          - name: trace
+            mountPath: "/opt/Axway/apigateway/trace"
           - name: events
             mountPath: {{ default "/opt/Axway/apigateway/events" .Values.anm.volumeMountsPaths.events | quote }}
           - name: audit
