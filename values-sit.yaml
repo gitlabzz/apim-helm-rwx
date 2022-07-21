@@ -617,9 +617,9 @@ apiportal:
     # entityId: ""
     # whitelist: ""
     whitelist:
-    # enabled: true
-    # oauthWhitelist: ""
-    # apiWhitelist: ""
+      enabled: true
+      oauthWhitelist: ""
+      apiWhitelist: ""
 
   redis:
     enabled: false
